@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e9eee6">
+  <meta name="description" content="探索近二十年六位日本建築師與十八座代表建築的互動群島。">
+  <title>日本建築師島｜Architecture Archipelago</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#architect-list">跳到建築師清單</a>
+
+  <main class="app-shell" id="app">
+    <section class="stage" aria-label="日本建築師群島互動地圖">
+      <header class="brand-card glass-card">
+        <div class="brand-mark" aria-hidden="true">建築<br>漂流。</div>
+        <div>
+          <p class="eyebrow">ARCHITECTURE ARCHIPELAGO</p>
+          <h1>日本建築師島</h1>
+          <p class="brand-sub">2006—2026・六座島・十八個故事</p>
+        </div>
+      </header>
+
+      <nav class="map-nav glass-card" aria-label="地圖功能">
+        <button class="pill-button" id="home-button" type="button" aria-label="回到群島全景">⌂ <span>全景</span></button>
+        <button class="pill-button" id="list-button" type="button" aria-controls="sidebar">☰ <span>清單</span></button>
+        <button class="pill-button" id="guide-button" type="button" aria-label="開啟操作說明">? <span class="sr-only">說明</span></button>
+      </nav>
+
+      <div class="island-world" id="island-world">
+        <img class="world-image" src="assets/images/archipelago-hero.png" alt="六座不同建築語彙的小島，分布在瀨戶內海般的水域中">
+        <div class="water-glow" aria-hidden="true"></div>
+        <div id="hotspots" class="hotspots" aria-label="建築師島嶼"></div>
+        <div class="ferry ferry-a" aria-hidden="true">◒</div>
+        <div class="ferry ferry-b" aria-hidden="true">◒</div>
+      </div>
+
+      <div class="map-key glass-card">
+        <span><i class="pulse-dot"></i> 點一座島，登岸</span>
+        <span class="desktop-only">拖曳視線，或從右側清單探索</span>
+      </div>
+
+      <div class="display-controls glass-card" role="toolbar" aria-label="顯示選項">
+        <button class="control-button active" type="button" data-light="morning" aria-pressed="true">
+          <span aria-hidden="true">☀</span><small>清晨</small>
+        </button>
+        <button class="control-button" type="button" data-light="dusk" aria-pressed="false">
+          <span aria-hidden="true">◐</span><small>黃昏</small>
+        </button>
+        <button class="control-button" type="button" id="labels-toggle" aria-pressed="true">
+          <span aria-hidden="true">⌑</span><small>名牌</small>
+        </button>
+        <button class="control-button" type="button" id="motion-toggle" aria-pressed="false">
+          <span aria-hidden="true">Ⅱ</span><small>暫停</small>
+        </button>
+      </div>
+    </section>
+
+    <aside class="sidebar" id="sidebar" aria-label="建築師索引">
+      <div class="sidebar-inner">
+        <div class="index-head">
+          <p class="eyebrow">THE ARCHITECT INDEX</p>
+          <h2>把空間，連起來。</h2>
+          <p>六位建築師，十八個代表案例。從材料、光、自然與社會，看見日本建築的二十年。</p>
+        </div>
+
+        <div class="stats-row" aria-label="網站內容統計">
+          <span><b>06</b> 座島</span>
+          <span><b>18</b> 個案例</span>
+          <span><b>20</b> 年</span>
+        </div>
+
+        <label class="search-box">
+          <span aria-hidden="true">⌕</span>
+          <input id="search" type="search" placeholder="搜尋建築師、作品或材料…" autocomplete="off">
+        </label>
+
+        <div class="filter-row" role="group" aria-label="篩選建築概念">
+          <button class="filter-chip active" type="button" data-filter="all">全部</button>
+          <button class="filter-chip" type="button" data-filter="material">材料</button>
+          <button class="filter-chip" type="button" data-filter="nature">自然</button>
+          <button class="filter-chip" type="button" data-filter="community">社會</button>
+        </div>
+
+        <div class="architect-list" id="architect-list" role="list"></div>
+
+        <footer class="sidebar-footer">
+          <button id="credits-button" class="text-button" type="button">照片授權與研究來源 ↗</button>
+          <p>本網站為教育性離線互動展覽。</p>
+        </footer>
+      </div>
+    </aside>
+  </main>
+
+  <section class="city-log" aria-label="島嶼日誌">
+    <span class="log-label">ISLAND LOG</span>
+    <div class="ticker" aria-live="polite"><span id="log-text">清晨的渡輪正駛向混凝土之島。</span></div>
+  </section>
+
+  <dialog class="intro-dialog" id="intro-dialog" aria-labelledby="intro-title">
+    <div class="intro-visual" aria-hidden="true">
+      <span class="mini-island one"></span><span class="mini-island two"></span><span class="mini-island three"></span>
+    </div>
+    <p class="eyebrow">WELCOME ABOARD / 01</p>
+    <h2 id="intro-title">每座島，是一種建築提問。</h2>
+    <p>混凝土如何收藏光？木材如何長成城市？建築又能不能成為災後的庇護？選一座島，跟著建築師的生命路線登岸。</p>
+    <div class="dialog-actions">
+      <button class="ghost-button" id="intro-skip" type="button">略過</button>
+      <button class="primary-button" id="intro-start" type="button">開始航行 →</button>
+    </div>
+  </dialog>
+
+  <dialog class="detail-dialog" id="detail-dialog" aria-labelledby="detail-name">
+    <button class="dialog-close" id="detail-close" type="button" aria-label="關閉建築師島">×</button>
+    <div id="detail-content"></div>
+  </dialog>
+
+  <dialog class="credits-dialog" id="credits-dialog" aria-labelledby="credits-title">
+    <button class="dialog-close" id="credits-close" type="button" aria-label="關閉來源說明">×</button>
+    <p class="eyebrow">CREDITS & SOURCES</p>
+    <h2 id="credits-title">影像授權與研究來源</h2>
+    <div class="credits-columns">
+      <section>
+        <h3>照片</h3>
+        <p>人物與建築照片來自 Wikimedia Commons，依各檔案頁面所列 CC 授權使用；圖像可能經等比例裁切。完整作者、授權與來源整理在專案的 <code>data/credits.json</code>。</p>
+        <div id="credits-list" class="credits-list"></div>
+      </section>
+      <section>
+        <h3>生平與作品</h3>
+        <ul class="source-list">
+          <li><a href="https://www.pritzkerprize.com/biography-tadao-ando" target="_blank" rel="noreferrer">Pritzker Prize｜Tadao Ando Biography</a></li>
+          <li><a href="https://kkaa.co.jp/en/about/kengokuma/" target="_blank" rel="noreferrer">Kengo Kuma & Associates｜Profile</a></li>
+          <li><a href="https://www.pritzkerprize.com/biography-kazuyo-sejima-and-ryue-nishizawa" target="_blank" rel="noreferrer">Pritzker Prize｜SANAA Biography</a></li>
+          <li><a href="https://www.pritzkerprize.com/biography-shigeru-ban" target="_blank" rel="noreferrer">Pritzker Prize｜Shigeru Ban Biography</a></li>
+          <li><a href="https://www.sou-fujimoto.net/profile/" target="_blank" rel="noreferrer">Sou Fujimoto Architects｜Profile</a></li>
+          <li><a href="https://www.pritzkerprize.com/biography-toyo-ito" target="_blank" rel="noreferrer">Pritzker Prize｜Toyo Ito Biography</a></li>
+          <li><a href="https://asiamodern.asia.edu.tw/p/412-1005-192.php?Lang=en" target="_blank" rel="noreferrer">亞洲大學現代美術館｜建築介紹</a></li>
+          <li><a href="https://kkaa.co.jp/en/locations/taiwan/" target="_blank" rel="noreferrer">Kengo Kuma & Associates｜Taiwan Projects</a></li>
+          <li><a href="https://www.tcam.museum/en/news/20250923-2" target="_blank" rel="noreferrer">臺中市立美術館｜臺中綠美圖</a></li>
+          <li><a href="https://www.tnam.museum/about_us/building" target="_blank" rel="noreferrer">臺南市美術館｜建築特色</a></li>
+          <li><a href="https://www.longstory.com.tw/space-2/" target="_blank" rel="noreferrer">南埕衖事｜場域空間</a></li>
+          <li><a href="https://www.toyo-ito.co.jp/WWW/Project_Descript/2015-/2015-p_02/2015-p_02_en.html" target="_blank" rel="noreferrer">Toyo Ito & Associates｜Gifu Media Cosmos</a></li>
+        </ul>
+        <p class="fine-print">主視覺為本專案原創生成插畫，僅用於導覽情境；不代表任何實際建築。</p>
+      </section>
+    </div>
+  </dialog>
+
+  <noscript>這個互動網站需要 JavaScript。請啟用 JavaScript 後重新開啟。</noscript>
+  <script src="app.js"></script>
+</body>
+</html>
